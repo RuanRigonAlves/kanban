@@ -5,16 +5,24 @@
  */
 
 // Composables
-import { createVuetify } from 'vuetify'
+import { createVuetify } from "vuetify";
 // Styles
-import '@mdi/font/css/materialdesignicons.css'
+import "@mdi/font/css/materialdesignicons.css";
 
-import '../styles/layers.css'
-import 'vuetify/styles'
+import "../styles/layers.css";
+import "vuetify/styles";
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: 'system',
+    defaultTheme: "dark",
+
+    themes: {
+      dark: {
+        colors: {
+          btn_primary: "#00994d",
+        },
+      },
+    },
   },
-})
+});
