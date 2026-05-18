@@ -49,11 +49,11 @@
 
       <v-list-item value="item2">
         <v-btn
-          to="/forum"
+          to="/sobre"
           icon="mdi-forum"
           rounded=""
-          :class="{ activeBtn: $route.path === '/forum' }"
-          :variant="$route.path === '/forum' ? 'tonal' : 'flat'"
+          :class="{ activeBtn: $route.path === '/sobre' }"
+          :variant="$route.path === '/sobre' ? 'tonal' : 'flat'"
         >
         </v-btn>
       </v-list-item>
