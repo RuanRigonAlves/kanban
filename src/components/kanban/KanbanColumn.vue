@@ -1,24 +1,49 @@
 <template class="">
   <v-card
     class="fill-height border rounded-lg"
-    :style="{ backgroundColor: props.bgColor }"
+    :color="column.color"
     width="280px"
   >
-    <v-card-title class="d-flex justify-center">{{ props.title }}</v-card-title>
+    <v-card-title class="d-flex justify-center"
+      >{{ column.title }}
+      <v-chip size="small">
+        {{ column.tasks.length }}
+      </v-chip>
+    </v-card-title>
 
-    <v-list class="mx-3">
-      <v-list-item v-for="i in 4" :key="i" class="">
-        <v-card>
-          <v-list-item-title>Task {{ i }}</v-list-item-title>
-        </v-card>
-      </v-list-item>
-    </v-list>
+    <draggable
+      v-model="column.tasks"
+      group="tasks"
+      item-key="id"
+      animation="200"
+      ghost-class="ghost"
+      class="fill-height"
+      @change="onTaskMoved"
+    >
+      <template #item="{ element }">
+        <TaskCard :task="element" :color="column.color" />
+      </template>
+    </draggable>
   </v-card>
 </template>
 
 <script setup>
+import TaskCard from "@/components/kanban/cards/TaskCard.vue";
+import draggable from "vuedraggable";
+
 const props = defineProps({
-  title: String,
-  bgColor: String,
+  column: Object,
 });
+
+const onTaskMoved = (event) => {
+  if (event.added) {
+    event.added.element.status = props.column.id;
+  }
+};
 </script>
+
+<style scoped>
+.ghost {
+  opacity: 0.4;
+}
+</style>

@@ -21,12 +21,12 @@ export default createVuetify({
       dark: {
         colors: {
           btn_primary: "#00994d",
-          bg_blue: "#0e72ca20",
-          bg_light_purple: "#9f57ac20",
-          bg_purple: "#7b1fa220",
-          bg_red: "#fc302c20",
-          bg_green: "#4f9b6e20",
-          bg_gray: "#61616120",
+          colunaToDo: "#0e72ca20",
+          colunaPendente: "#9f57ac20",
+          colunaEmAndamento: "#7b1fa220",
+          colunaConcluido: "#4f9b6e20",
+          colunaRevisao: "#61616120",
+          colunaCancelado: "#c6282820",
         },
       },
     },

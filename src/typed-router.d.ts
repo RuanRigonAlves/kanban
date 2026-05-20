@@ -41,18 +41,25 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/Projetos/': RouteRecordInfo<
-      '/Projetos/',
-      '/Projetos',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/Sobre/': RouteRecordInfo<
       '/Sobre/',
       '/Sobre',
       Record<never, never>,
       Record<never, never>,
+      | never
+    >,
+    '/Tarefas/': RouteRecordInfo<
+      '/Tarefas/',
+      '/Tarefas',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/Tarefas/[tarefa]': RouteRecordInfo<
+      '/Tarefas/[tarefa]',
+      '/Tarefas/:tarefa',
+      { tarefa: ParamValue<true> },
+      { tarefa: ParamValue<false> },
       | never
     >,
   }
@@ -80,15 +87,21 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/Projetos/index.vue': {
-      routes:
-        | '/Projetos/'
-      views:
-        | never
-    }
     'src/pages/Sobre/index.vue': {
       routes:
         | '/Sobre/'
+      views:
+        | never
+    }
+    'src/pages/Tarefas/index.vue': {
+      routes:
+        | '/Tarefas/'
+      views:
+        | never
+    }
+    'src/pages/Tarefas/[tarefa].vue': {
+      routes:
+        | '/Tarefas/[tarefa]'
       views:
         | never
     }

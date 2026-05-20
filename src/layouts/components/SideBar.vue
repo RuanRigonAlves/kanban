@@ -38,11 +38,11 @@
     <v-list nav>
       <v-list-item value="item1" class="pa-0">
         <v-btn
-          to="/projetos"
+          to="/tarefas"
           icon="mdi-view-dashboard"
           rounded
-          :class="{ activeBtn: $route.path === '/projetos' }"
-          :variant="$route.path === '/projetos' ? 'tonal' : 'flat'"
+          :class="{ activeBtn: $route.path === '/tarefas' }"
+          :variant="$route.path === '/tarefas' ? 'tonal' : 'flat'"
         >
         </v-btn>
       </v-list-item>
