@@ -14,6 +14,7 @@
       animation="200"
       ghost-class="ghost"
       class="fill-height"
+      drag-class="dragging"
       @change="onTaskMoved"
     >
       <template #item="{ element }">
@@ -46,5 +47,9 @@ const onTaskMoved = (event) => {
 <style scoped>
 .ghost {
   opacity: 0.4;
+}
+
+.dragging {
+  opacity: 0.6;
 }
 </style>

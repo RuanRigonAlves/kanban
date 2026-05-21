@@ -1,5 +1,8 @@
 <template>
-  <v-card class="pa-3 mx-3 mb-3 rounded-lg cursor-grab border" elevation="2">
+  <v-card
+    class="pa-3 mx-3 mb-3 rounded-lg cursor-grab border task-card"
+    elevation="2"
+  >
     <div class="font-weight-medium">
       {{ task.title }}
     </div>
@@ -42,7 +45,18 @@ const priorityColor = {
 </script>
 
 <style scoped>
-.v-card {
+.task-card {
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.task-card {
+  cursor: grab;
+}
+
+.task-card:active {
+  cursor: grabbing;
 }
 </style>
