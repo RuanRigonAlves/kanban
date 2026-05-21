@@ -20,6 +20,10 @@ export default createVuetify({
     themes: {
       dark: {
         colors: {
+          surface: "#121212",
+          primary: "#00994d",
+          bgMain: "#161616",
+
           btn_primary: "#00994d",
           colunaToDo: "#0e72ca20",
           colunaPendente: "#9f57ac20",

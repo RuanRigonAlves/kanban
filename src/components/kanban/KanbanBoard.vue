@@ -1,6 +1,5 @@
 <template>
-  <p>Kanban Board</p>
-  <div class="d-flex justify-space-between fill-height">
+  <div class="kanban-grid">
     <KanbanColumn v-for="column in columns" :key="column.id" :column="column" />
   </div>
 </template>
@@ -17,15 +16,47 @@ const columns = ref([
     color: "colunaToDo",
     tasks: mockTasks.filter((task) => task.status === "todo"),
   },
-  { id: "pendente", title: "Pendente", color: "colunaPendente", tasks: [] },
+  {
+    id: "pendente",
+    title: "Pendente",
+    color: "colunaPendente",
+    tasks: [mockTasks.find((task) => task.status === "pendente")],
+  },
   {
     id: "em-andamento",
     title: "Em Andamento",
     color: "colunaEmAndamento",
-    tasks: [],
+    tasks: [mockTasks.find((task) => task.status === "em-andamento")],
   },
-  { id: "revisao", title: "Em Revisão", color: "colunaRevisao", tasks: [] },
-  { id: "concluido", title: "Concluído", color: "colunaConcluido", tasks: [] },
-  { id: "cancelado", title: "Cancelado", color: "colunaCancelado", tasks: [] },
+  {
+    id: "revisao",
+    title: "Em Revisão",
+    color: "colunaRevisao",
+    tasks: [mockTasks.find((task) => task.status === "revisao")],
+  },
+  {
+    id: "concluido",
+    title: "Concluído",
+    color: "colunaConcluido",
+    tasks: [mockTasks.find((task) => task.status === "concluido")],
+  },
+  {
+    id: "cancelado",
+    title: "Cancelado",
+    color: "colunaCancelado",
+    tasks: [mockTasks.find((task) => task.status === "cancelado")],
+  },
 ]);
 </script>
+
+<style scoped>
+.kanban-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 16px;
+
+  align-items: start;
+}
+</style>

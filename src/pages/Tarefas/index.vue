@@ -1,5 +1,5 @@
 <template>
-  <h1>Projetos</h1>
+  <h1>Tasks</h1>
   <KanbanBoard />
 </template>
 

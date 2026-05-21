@@ -4,13 +4,11 @@
       {{ task.title }}
     </div>
 
-    <div class="text-caption text-medium-emphasis mt-1">
+    <div class="text-caption text-medium-emphasis my-3">
       {{ task.description }}
     </div>
 
-    <div></div>
-
-    <div class="mt-2">
+    <div class="mt-2 d-flex align-center justify-space-between">
       <v-chip
         prepend-icon="mdi-circle"
         size="small"
@@ -19,6 +17,13 @@
       >
         {{ task.status }}</v-chip
       >
+
+      <v-icon
+        icon="mdi-alert-box-outline"
+        class="ml-2"
+        :color="priorityColor[task.priority]"
+      >
+      </v-icon>
     </div>
   </v-card>
 </template>
@@ -28,4 +33,10 @@ defineProps({
   color: String,
   task: Object,
 });
+
+const priorityColor = {
+  high: "error",
+  medium: "warning",
+  low: "success",
+};
 </script>

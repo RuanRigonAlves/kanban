@@ -1,12 +1,8 @@
-<template class="">
-  <v-card
-    class="fill-height border rounded-lg"
-    :color="column.color"
-    width="280px"
-  >
+<template>
+  <v-card class="fill-height border rounded-lg" :color="column.color">
     <v-card-title class="d-flex justify-center"
       >{{ column.title }}
-      <v-chip size="small">
+      <v-chip size="small" class="ml-2">
         {{ column.tasks.length }}
       </v-chip>
     </v-card-title>

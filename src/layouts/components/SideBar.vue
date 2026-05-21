@@ -1,38 +1,34 @@
 <template>
   <v-navigation-drawer
     class="drawer"
+    color=""
     theme="system"
     permanent
     rail
     rail-width="100"
   >
     <!-- Logo -->
-    <v-list>
-      <v-list-item value="home" class="pa-0">
-        <v-btn
-          to="/"
-          icon="$vuetify"
-          rounded=""
-          :class="{ activeBtn: $route.path === '/' }"
-          :variant="$route.path === '/' ? 'tonal' : 'flat'"
-        >
-        </v-btn>
-      </v-list-item>
-    </v-list>
+    <div class="d-flex justify-center py-3">
+      <RouterLink to="/" class="logo-link">
+        <v-icon icon="$vuetify" size="40" color="primary" />
+      </RouterLink>
+    </div>
 
     <!-- Perfil -->
-    <v-list>
-      <v-list-item value="perfil">
-        <v-btn
-          to="/perfil"
-          icon="mdi-account-circle"
-          rounded=""
-          :class="{ activeBtn: $route.path === '/perfil' }"
-          :variant="$route.path === '/perfil' ? 'tonal' : 'flat'"
-        >
-        </v-btn>
-      </v-list-item>
-    </v-list>
+    <div class="d-flex justify-center my-6">
+      <!-- <v-btn
+        to="/perfil"
+        icon="mdi-account-circle"
+        rounded=""
+        :class="{ activeBtn: $route.path === '/perfil' }"
+        :variant="$route.path === '/perfil' ? 'tonal' : 'flat'"
+      >
+      </v-btn> -->
+
+      <RouterLink to="/perfil" class="nav-link">
+        <v-icon icon="mdi-account-box-outline" size="32" />
+      </RouterLink>
+    </div>
 
     <!-- Lista -->
     <v-list nav>
@@ -88,5 +84,10 @@ const items = [
 
 .activeBtn {
   background: rgb(var(--v-theme-btn_primary)) !important;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
 }
 </style>

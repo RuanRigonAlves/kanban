@@ -5,7 +5,7 @@
 
       <top-bar></top-bar>
 
-      <v-container fluid height="100%">
+      <v-container fluid height="100%" class="bg-bgMain">
         <router-view></router-view>
       </v-container>
     </v-main>
