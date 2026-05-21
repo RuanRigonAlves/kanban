@@ -40,3 +40,9 @@ const priorityColor = {
   low: "success",
 };
 </script>
+
+<style scoped>
+.v-card {
+  user-select: none;
+}
+</style>
