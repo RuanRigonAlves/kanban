@@ -1,7 +1,7 @@
 export const mockTasks = [
   {
     id: 1,
-    status: "todo",
+    status: "nao-iniciado",
     title: "Criar layout do dashboard",
     description: "Estruturar sidebar e navbar",
     priority: "high",
@@ -11,7 +11,7 @@ export const mockTasks = [
 
   {
     id: 2,
-    status: "todo",
+    status: "nao-iniciado",
     title: "Configurar Vuetify",
     description:
       "Criar tema darkgdkfgjdf;klgjkdfldfjkglfkdgjdflkgjkldgjkdfklgjdllfgjsfksdjfklssdjlsdkjsdjfkllkdfkjsdlkdfkgjlfldgkldfjklgjlk;djlkdfglkfdgljkdfklgdjkdlf",
@@ -71,7 +71,7 @@ export const mockTasks = [
 
   {
     id: 8,
-    status: "todo",
+    status: "nao-iniciado",
     title: "Criar menu lateral",
     description: "Adicionar navegação principal do sistema",
     priority: "high",

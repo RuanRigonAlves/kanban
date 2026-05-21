@@ -3,12 +3,12 @@
     <v-card-title class="d-flex justify-center"
       >{{ column.title }}
       <v-chip size="small" class="ml-2">
-        {{ column.tasks.length }}
+        {{ tasks.length }}
       </v-chip>
     </v-card-title>
 
     <draggable
-      v-model="column.tasks"
+      :list="tasks"
       group="tasks"
       item-key="id"
       animation="200"
@@ -27,13 +27,18 @@
 import TaskCard from "@/components/kanban/cards/TaskCard.vue";
 import draggable from "vuedraggable";
 
+import { useKanbanStore } from "@/stores/kanban.js";
+
+const kanban = useKanbanStore();
+
 const props = defineProps({
   column: Object,
+  tasks: Array,
 });
 
 const onTaskMoved = (event) => {
   if (event.added) {
-    event.added.element.status = props.column.id;
+    kanban.moveTask(event.added.element.id, props.column.id);
   }
 };
 </script>
