@@ -3,13 +3,10 @@ import { ref } from "vue";
 
 import { mockTasks } from "@/mocks/tasks";
 
-export const useKanbanStore = defineStore(
-  "kanban",
-  () => {
-    // STATE
-    const tasks = ref(mockTasks);
-
-    const columns = [
+export const useKanbanStore = defineStore("kanban", {
+  state: () => ({
+    tasks: mockTasks,
+    columns: [
       {
         id: "nao-iniciado",
         title: "Nao Iniciado",
@@ -45,36 +42,27 @@ export const useKanbanStore = defineStore(
         title: "Cancelado",
         color: "colunaCancelado",
       },
-    ];
+    ],
+  }),
 
-    // ACTIONS
-    const moveTask = (taskId, newStatus) => {
-      const task = tasks.value.find((task) => task.id === taskId);
-
+  actions: {
+    moveTask(taskId, newStatus) {
+      const task = this.tasks.find((task) => task.id === taskId);
       if (task) {
         task.status = newStatus;
       }
-    };
+    },
 
-    const addTask = (newTask) => {
-      tasks.value.push(newTask);
-    };
-
-    // GETTERS
-    const getTasksByStatus = (status) => {
-      return tasks.value.filter((task) => task.status === status);
-    };
-
-    return {
-      tasks,
-      columns,
-
-      moveTask,
-      getTasksByStatus,
-      addTask,
-    };
+    addTask(newTask) {
+      this.tasks.push(newTask);
+    },
   },
-  {
-    persist: true,
+
+  getters: {
+    getTasksByStatus: (state) => (status) => {
+      return state.tasks.filter((task) => task.status === status);
+    },
   },
-);
+
+  persist: true,
+});

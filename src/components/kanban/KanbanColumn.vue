@@ -1,5 +1,9 @@
 <template>
-  <v-card class="fill-height border rounded-lg" :color="column.color">
+  <v-card
+    class="fill-height border rounded-lg"
+    :color="column.color"
+    min-height="80vh"
+  >
     <v-card-title class="d-flex justify-center"
       >{{ column.title }}
       <v-chip size="small" class="ml-2">
@@ -11,7 +15,7 @@
       :list="tasks"
       group="tasks"
       item-key="id"
-      animation="200"
+      animation="300"
       ghost-class="ghost"
       class="fill-height"
       drag-class="dragging"
