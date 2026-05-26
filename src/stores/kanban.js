@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
 
 import { mockTasks } from "@/mocks/tasks";
+import { mockBoards } from "@/mocks/boards";
 
 export const useKanbanStore = defineStore("kanban", {
   state: () => ({
-    tasks: mockTasks,
     columns: [
       {
         id: "nao-iniciado",
@@ -43,11 +42,16 @@ export const useKanbanStore = defineStore("kanban", {
         color: "colunaCancelado",
       },
     ],
+
+    boards: mockBoards,
+
+    tasks: mockTasks,
   }),
 
   actions: {
     moveTask(taskId, newStatus) {
       const task = this.tasks.find((task) => task.id === taskId);
+
       if (task) {
         task.status = newStatus;
       }
@@ -56,11 +60,21 @@ export const useKanbanStore = defineStore("kanban", {
     addTask(newTask) {
       this.tasks.push(newTask);
     },
+
+    removeTask(taskId) {
+      this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    },
   },
 
   getters: {
-    getTasksByStatus: (state) => (status) => {
-      return state.tasks.filter((task) => task.status === status);
+    getTasksByStatus: (state) => (boardId, status) => {
+      return state.tasks.filter(
+        (task) => task.boardId === boardId && task.status === status,
+      );
+    },
+
+    getBoardById: (state) => (boardId) => {
+      return state.boards.find((board) => board.id === boardId);
     },
   },
 

@@ -34,32 +34,39 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/Perfil/': RouteRecordInfo<
-      '/Perfil/',
-      '/Perfil',
+    '/boards/': RouteRecordInfo<
+      '/boards/',
+      '/boards',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/Sobre/': RouteRecordInfo<
-      '/Sobre/',
-      '/Sobre',
+    '/boards/[id]/': RouteRecordInfo<
+      '/boards/[id]/',
+      '/boards/:id',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/boards/[id]/CreateTask': RouteRecordInfo<
+      '/boards/[id]/CreateTask',
+      '/boards/:id/CreateTask',
+      { id: ParamValue<true> },
+      { id: ParamValue<false> },
+      | never
+    >,
+    '/perfil/': RouteRecordInfo<
+      '/perfil/',
+      '/perfil',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/Tarefas/': RouteRecordInfo<
-      '/Tarefas/',
-      '/Tarefas',
+    '/sobre/': RouteRecordInfo<
+      '/sobre/',
+      '/sobre',
       Record<never, never>,
       Record<never, never>,
-      | never
-    >,
-    '/Tarefas/[tarefa]': RouteRecordInfo<
-      '/Tarefas/[tarefa]',
-      '/Tarefas/:tarefa',
-      { tarefa: ParamValue<true> },
-      { tarefa: ParamValue<false> },
       | never
     >,
   }
@@ -81,27 +88,33 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
-    'src/pages/Perfil/index.vue': {
+    'src/pages/boards/index.vue': {
       routes:
-        | '/Perfil/'
+        | '/boards/'
       views:
         | never
     }
-    'src/pages/Sobre/index.vue': {
+    'src/pages/boards/[id]/index.vue': {
       routes:
-        | '/Sobre/'
+        | '/boards/[id]/'
       views:
         | never
     }
-    'src/pages/Tarefas/index.vue': {
+    'src/pages/boards/[id]/CreateTask.vue': {
       routes:
-        | '/Tarefas/'
+        | '/boards/[id]/CreateTask'
       views:
         | never
     }
-    'src/pages/Tarefas/[tarefa].vue': {
+    'src/pages/perfil/index.vue': {
       routes:
-        | '/Tarefas/[tarefa]'
+        | '/perfil/'
+      views:
+        | never
+    }
+    'src/pages/sobre/index.vue': {
+      routes:
+        | '/sobre/'
       views:
         | never
     }
