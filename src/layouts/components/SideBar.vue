@@ -16,15 +16,6 @@
 
     <!-- Perfil -->
     <div class="d-flex justify-center my-6">
-      <!-- <v-btn
-        to="/perfil"
-        icon="mdi-account-circle"
-        rounded=""
-        :class="{ activeBtn: $route.path === '/perfil' }"
-        :variant="$route.path === '/perfil' ? 'tonal' : 'flat'"
-      >
-      </v-btn> -->
-
       <RouterLink to="/perfil" class="nav-link">
         <v-icon icon="mdi-account-box-outline" size="32" />
       </RouterLink>
@@ -37,8 +28,8 @@
           to="/boards"
           icon="mdi-view-dashboard"
           rounded
-          :class="{ activeBtn: $route.path === '/boards' }"
-          :variant="$route.path === '/boards' ? 'tonal' : 'flat'"
+          :class="{ activeBtn: isActiveRoute('/boards') }"
+          :variant="isActiveRoute('/boards') ? 'tonal' : 'flat'"
         >
         </v-btn>
       </v-list-item>
@@ -48,8 +39,8 @@
           to="/sobre"
           icon="mdi-forum"
           rounded=""
-          :class="{ activeBtn: $route.path === '/sobre' }"
-          :variant="$route.path === '/sobre' ? 'tonal' : 'flat'"
+          :class="{ activeBtn: isActiveRoute('/sobre') }"
+          :variant="isActiveRoute('/sobre') ? 'tonal' : 'flat'"
         >
         </v-btn>
       </v-list-item>
@@ -57,17 +48,13 @@
   </v-navigation-drawer>
 </template>
 
-<script>
-import { ref } from "vue";
+<script setup>
+import { useRoute } from "vue-router";
+const route = useRoute();
 
-const drawer = ref(true);
-const rail = ref(true);
-const wider = ref(false);
-const items = [
-  { icon: "mdi-home-city", title: "Home", value: "home" },
-  { icon: "mdi-account", title: "My Account", value: "account" },
-  { icon: "mdi-account-group-outline", title: "Users", value: "users" },
-];
+const isActiveRoute = (path) => {
+  return route.path.startsWith(path);
+};
 </script>
 
 <style scoped>

@@ -48,13 +48,6 @@ declare module 'vue-router/auto-routes' {
       { id: ParamValue<false> },
       | never
     >,
-    '/boards/[id]/CreateTask': RouteRecordInfo<
-      '/boards/[id]/CreateTask',
-      '/boards/:id/CreateTask',
-      { id: ParamValue<true> },
-      { id: ParamValue<false> },
-      | never
-    >,
     '/perfil/': RouteRecordInfo<
       '/perfil/',
       '/perfil',
@@ -97,12 +90,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/boards/[id]/index.vue': {
       routes:
         | '/boards/[id]/'
-      views:
-        | never
-    }
-    'src/pages/boards/[id]/CreateTask.vue': {
-      routes:
-        | '/boards/[id]/CreateTask'
       views:
         | never
     }

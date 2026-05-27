@@ -32,18 +32,19 @@
 import TaskCard from "@/components/kanban/cards/TaskCard.vue";
 import draggable from "vuedraggable";
 
-import { useKanbanStore } from "@/stores/kanban.js";
-
-const kanban = useKanbanStore();
-
 const props = defineProps({
   column: Object,
   tasks: Array,
 });
 
+const emit = defineEmits(["task-moved"]);
+
 const onTaskMoved = (event) => {
   if (event.added) {
-    kanban.moveTask(event.added.element.id, props.column.id);
+    emit("task-moved", {
+      taskId: event.added.element.id,
+      newStatus: props.column.id,
+    });
   }
 };
 </script>
