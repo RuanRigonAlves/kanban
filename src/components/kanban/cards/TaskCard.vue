@@ -2,6 +2,7 @@
   <v-card
     class="pa-3 mx-3 mb-3 rounded-lg cursor-grab border task-card"
     elevation="2"
+    @click="$emit('click')"
   >
     <div class="font-weight-medium">
       {{ task.title }}
@@ -36,6 +37,8 @@ defineProps({
   color: String,
   task: Object,
 });
+
+defineEmits(["click"]);
 
 const priorityColor = {
   high: "error",

@@ -22,7 +22,11 @@
       @change="onTaskMoved"
     >
       <template #item="{ element }">
-        <TaskCard :task="element" :color="column.color" />
+        <TaskCard
+          :task="element"
+          :color="column.color"
+          @click="$emit('view-task', element)"
+        />
       </template>
     </draggable>
   </v-card>
@@ -37,7 +41,7 @@ const props = defineProps({
   tasks: Array,
 });
 
-const emit = defineEmits(["task-moved"]);
+const emit = defineEmits(["task-moved", "view-task"]);
 
 const onTaskMoved = (event) => {
   if (event.added) {

@@ -11,6 +11,7 @@ import "@mdi/font/css/materialdesignicons.css";
 
 import "../styles/layers.css";
 import "vuetify/styles";
+import { red } from "vuetify/util/colors";
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
@@ -23,6 +24,11 @@ export default createVuetify({
           surface: "#121212",
           primary: "#00994d",
           bgMain: "#161616",
+
+          btnRed: "#c62828",
+          btnOrange: "#fb8c00",
+          btnGreen: "#00994d",
+          btnBlue: "#0e72ca",
 
           btn_primary: "#00994d",
           colunaToDo: "#0e72ca20",

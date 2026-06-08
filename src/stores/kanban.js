@@ -26,6 +26,17 @@ export const useKanbanStore = defineStore("kanban", {
     removeTask(taskId) {
       this.tasks = this.tasks.filter((task) => task.id !== taskId);
     },
+
+    updateTask(updatedTask) {
+      const task = this.tasks.find(
+        (task) =>
+          task.id === updatedTask.id && task.boardId === updatedTask.boardId,
+      );
+
+      if (!task) return;
+
+      Object.assign(task, updatedTask);
+    },
   },
 
   getters: {
@@ -41,6 +52,12 @@ export const useKanbanStore = defineStore("kanban", {
 
     getTasksByBoard: (state) => (boardId) => {
       return state.tasks.filter((task) => task.boardId === boardId);
+    },
+
+    getTaskById: (state) => (boardId, taskId) => {
+      return state.tasks.find(
+        (task) => task.id === Number(taskId) && task.boardId === boardId,
+      );
     },
   },
 
