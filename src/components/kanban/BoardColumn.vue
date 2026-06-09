@@ -22,7 +22,11 @@
       @change="onTaskMoved"
     >
       <template #item="{ element }">
-        <TaskCard :task="element" :color="column.color" />
+        <TaskCard
+          :task="element"
+          :color="column.color"
+          @click="$emit('view-task', element)"
+        />
       </template>
     </draggable>
   </v-card>
@@ -32,18 +36,19 @@
 import TaskCard from "@/components/kanban/cards/TaskCard.vue";
 import draggable from "vuedraggable";
 
-import { useKanbanStore } from "@/stores/kanban.js";
-
-const kanban = useKanbanStore();
-
 const props = defineProps({
   column: Object,
   tasks: Array,
 });
 
+const emit = defineEmits(["task-moved", "view-task"]);
+
 const onTaskMoved = (event) => {
   if (event.added) {
-    kanban.moveTask(event.added.element.id, props.column.id);
+    emit("task-moved", {
+      taskId: event.added.element.id,
+      newStatus: props.column.id,
+    });
   }
 };
 </script>
