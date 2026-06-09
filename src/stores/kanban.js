@@ -5,9 +5,9 @@ import { mockBoards } from "@/mocks/boards";
 
 export const useKanbanStore = defineStore("kanban", {
   state: () => ({
-    boards: mockBoards,
-
+    searchQuery: "",
     tasks: mockTasks,
+    boards: mockBoards,
   }),
 
   actions: {
@@ -40,10 +40,19 @@ export const useKanbanStore = defineStore("kanban", {
   },
 
   getters: {
-    getTasksByStatus: (state) => (boardId, status) => {
-      return state.tasks.filter(
-        (task) => task.boardId === boardId && task.status === status,
-      );
+    getSearchedTasks: (state) => (boardId) => {
+      return state.tasks.filter((task) => {
+        const matchesBoard = task.boardId === boardId;
+
+        const matchesSearch =
+          !state.searchQuery ||
+          task.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+          task.description
+            .toLowerCase()
+            .includes(state.searchQuery.toLowerCase());
+
+        return matchesBoard && matchesSearch;
+      });
     },
 
     getBoardById: (state) => (boardId) => {

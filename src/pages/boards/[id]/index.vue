@@ -1,15 +1,30 @@
 <template>
-  <div class="d-flex align-center justify-space-between mb-4">
+  <div class="header d-flex align-center justify-space-between">
     <h1 class="my-0">{{ board.title }} Tasks</h1>
 
-    <CreateTaskDialog :board-id="boardId" />
+    <v-text-field
+      v-model="kanban.searchQuery"
+      variant="outlined"
+      label="Buscar task"
+      hide-details
+    >
+    </v-text-field>
+
+    <div class="d-flex align-center justify-end ga-4">
+      <div>FIlter options</div>
+
+      <CreateTaskDialog :board-id="boardId" />
+    </div>
   </div>
+
+  <v-divider class="my-4"> </v-divider>
+
   <div class="kanban-grid">
-    <BoardColumn
+    <TasksColumn
       v-for="column in kanbanColumns"
       :key="column.id"
       :column="column"
-      :tasks="kanban.getTasksByStatus(boardId, column.id)"
+      :tasks="getColumnTasks(column.id)"
       @task-moved="handleTaskMoved"
       @view-task="openTask"
     />
@@ -19,7 +34,7 @@
 </template>
 
 <script setup>
-import BoardColumn from "@/components/kanban/BoardColumn.vue";
+import TasksColumn from "@/components/kanban/TasksColumn.vue";
 import ViewTaskDialog from "@/components/kanban/dialogs/ViewTaskDialog.vue";
 
 import { ref } from "vue";
@@ -31,21 +46,25 @@ import CreateTaskDialog from "@/components/kanban/dialogs/CreateTaskDialog.vue";
 const route = useRoute();
 const boardId = route.params.id;
 const kanban = useKanbanStore();
-
 const board = kanban.getBoardById(boardId);
-
-console.log(board);
 
 // View task dialog
 const selectedTask = ref(null);
 const viewTaskDialog = ref(false);
 
+const getColumnTasks = (status) => {
+  return kanban
+    .getSearchedTasks(boardId)
+    .filter((task) => task.status === status);
+};
+
+// Open task details dialog
 const openTask = (task) => {
   selectedTask.value = task;
   viewTaskDialog.value = true;
 };
-//
 
+// Handle task moved between columns
 const handleTaskMoved = ({ taskId, newStatus }) => {
   kanban.moveTask(taskId, newStatus);
 };
@@ -60,5 +79,11 @@ const handleTaskMoved = ({ taskId, newStatus }) => {
   gap: 16px;
 
   align-items: start;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 550px 350px 550px;
+  align-items: center;
 }
 </style>
