@@ -72,7 +72,7 @@ const createTask = async () => {
     priority: form.value.priority,
     status: form.value.status,
 
-    dueDate: null,
+    dueDate: form.value.dueDate,
     tags: [],
   });
 
