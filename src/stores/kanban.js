@@ -11,7 +11,6 @@ export const useKanbanStore = defineStore("kanban", {
     boards: mockBoards,
     sortDate: null,
     sortPriority: null,
-    sortStatus: null,
   }),
 
   actions: {
@@ -43,11 +42,18 @@ export const useKanbanStore = defineStore("kanban", {
     },
 
     toggleDateSort() {
+      this.sortPriority = null;
       this.sortDate = this.sortDate === "desc" ? "asc" : "desc";
+    },
+
+    togglePrioritySort() {
+      this.sortDate = null;
+      this.sortPriority = this.sortPriority === "desc" ? "asc" : "desc";
     },
 
     clearFilters() {
       this.sortDate = null;
+      this.sortPriority = null;
     },
   },
 
@@ -67,6 +73,7 @@ export const useKanbanStore = defineStore("kanban", {
       });
 
       tasks = taskFilters.applyDateSort(tasks, state.sortDate);
+      tasks = taskFilters.applyPrioritySort(tasks, state.sortPriority);
 
       return tasks;
     },

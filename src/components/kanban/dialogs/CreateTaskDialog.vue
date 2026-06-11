@@ -65,15 +65,12 @@ const createTask = async () => {
   kanban.addTask({
     id: Date.now(),
     boardId: props.boardId,
-
     title: form.value.title,
     description: form.value.description,
-
     priority: form.value.priority,
     status: form.value.status,
-
-    dueDate: form.value.dueDate,
-    tags: [],
+    dueDate: form.value.dueDate || null,
+    tags: form.value.tags || [],
   });
 
   dialog.value = false;
