@@ -2,12 +2,15 @@ import { defineStore } from "pinia";
 
 import { mockTasks } from "@/mocks/tasks";
 import { mockBoards } from "@/mocks/boards";
+import { taskFilters } from "@/utils/taskFilters.js";
 
 export const useKanbanStore = defineStore("kanban", {
   state: () => ({
-    boards: mockBoards,
-
+    searchQuery: "",
     tasks: mockTasks,
+    boards: mockBoards,
+    sortDate: null,
+    sortPriority: null,
   }),
 
   actions: {
@@ -37,13 +40,42 @@ export const useKanbanStore = defineStore("kanban", {
 
       Object.assign(task, updatedTask);
     },
+
+    toggleDateSort() {
+      this.sortPriority = null;
+      this.sortDate = this.sortDate === "desc" ? "asc" : "desc";
+    },
+
+    togglePrioritySort() {
+      this.sortDate = null;
+      this.sortPriority = this.sortPriority === "desc" ? "asc" : "desc";
+    },
+
+    clearFilters() {
+      this.sortDate = null;
+      this.sortPriority = null;
+    },
   },
 
   getters: {
-    getTasksByStatus: (state) => (boardId, status) => {
-      return state.tasks.filter(
-        (task) => task.boardId === boardId && task.status === status,
-      );
+    getSearchedTasks: (state) => (boardId) => {
+      const query = state.searchQuery.trim().toLowerCase();
+
+      let tasks = state.tasks.filter((task) => {
+        const matchesBoard = task.boardId === boardId;
+
+        const matchesSearch =
+          !query ||
+          task.title.toLowerCase().includes(query) ||
+          task.description.toLowerCase().includes(query);
+
+        return matchesBoard && matchesSearch;
+      });
+
+      tasks = taskFilters.applyDateSort(tasks, state.sortDate);
+      tasks = taskFilters.applyPrioritySort(tasks, state.sortPriority);
+
+      return tasks;
     },
 
     getBoardById: (state) => (boardId) => {

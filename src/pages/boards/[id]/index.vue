@@ -1,15 +1,14 @@
 <template>
-  <div class="d-flex align-center justify-space-between mb-4">
-    <h1 class="my-0">{{ board.title }} Tasks</h1>
+  <TasksToolBar :board="board" :board-id="boardId" />
 
-    <CreateTaskDialog :board-id="boardId" />
-  </div>
+  <v-divider class="my-4"> </v-divider>
+
   <div class="kanban-grid">
-    <BoardColumn
+    <TasksColumn
       v-for="column in kanbanColumns"
       :key="column.id"
       :column="column"
-      :tasks="kanban.getTasksByStatus(boardId, column.id)"
+      :tasks="getColumnTasks(column.id)"
       @task-moved="handleTaskMoved"
       @view-task="openTask"
     />
@@ -19,33 +18,37 @@
 </template>
 
 <script setup>
-import BoardColumn from "@/components/kanban/BoardColumn.vue";
+import TasksColumn from "@/components/kanban/TasksColumn.vue";
 import ViewTaskDialog from "@/components/kanban/dialogs/ViewTaskDialog.vue";
+import TasksToolBar from "@/components/kanban/TasksToolBar.vue";
 
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useKanbanStore } from "@/stores/kanban.js";
 import { useRoute } from "vue-router";
 import { kanbanColumns } from "@/constants/kanbanColumns.js";
-import CreateTaskDialog from "@/components/kanban/dialogs/CreateTaskDialog.vue";
 
 const route = useRoute();
 const boardId = route.params.id;
 const kanban = useKanbanStore();
-
 const board = kanban.getBoardById(boardId);
-
-console.log(board);
 
 // View task dialog
 const selectedTask = ref(null);
 const viewTaskDialog = ref(false);
 
+const filteredTasks = computed(() => kanban.getSearchedTasks(boardId));
+
+const getColumnTasks = (status) => {
+  return filteredTasks.value.filter((task) => task.status === status);
+};
+
+// Open task details dialog
 const openTask = (task) => {
   selectedTask.value = task;
   viewTaskDialog.value = true;
 };
-//
 
+// Handle task moved between columns
 const handleTaskMoved = ({ taskId, newStatus }) => {
   kanban.moveTask(taskId, newStatus);
 };
@@ -60,5 +63,18 @@ const handleTaskMoved = ({ taskId, newStatus }) => {
   gap: 16px;
 
   align-items: start;
+}
+
+.header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(250px, 1fr)
+    400px
+    minmax(250px, 1fr);
+
+  gap: 24px;
+
+  align-items: center;
 }
 </style>
